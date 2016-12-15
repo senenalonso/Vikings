@@ -1,7 +1,7 @@
 //Clase base
 var Warrior = function (stamina, health) {
-  this.stamina = stamina;
-  this.health = health;
+  this.stamina = this._calculateRandom(20, stamina);
+  this.health = this._calculateRandom(20, health);
 };
 
 Warrior.prototype.loseHealth = function (damage) {
@@ -16,8 +16,12 @@ Warrior.prototype.getHealth = function () {
   return this.health;
 };
 
+Warrior.prototype._calculateRandom= function (min,max) {
+  return Math.floor(Math.random()*(max-min)+min)
+};
+
 //Expecialización Viking - Añade el nombre
-var Viking = function (name, stamina, health) {
+var Viking = function (stamina, health, name) {
   Warrior.call(this, stamina, health);
   this.name = name;
 };

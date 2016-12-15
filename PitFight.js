@@ -76,3 +76,27 @@ pitfight = {
     this.winner2 = false;
   }
 };
+
+
+function createArmy (numWarriors, warriorType, stamina, health) {
+  var army = [];
+
+  $.ajax({
+    url: 'https://randomuser.me/api/?results='+numWarriors,
+    dataType: 'json',
+    success: function(data) {
+      for(var k = 0; k < numWarriors; k++){
+        army.push(new warriorType(stamina, health, data.results[k].name.first));
+      };
+    },
+    error: function(data) {
+      console.log("error");
+    }
+  });
+
+  return army;
+}
+
+var armyVikings = createArmy(10, Viking, 100, 300);
+var armySaxons = createArmy(10, Saxon, 50, 100);
+
